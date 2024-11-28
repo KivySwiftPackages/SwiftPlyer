@@ -2,7 +2,7 @@ from swift_tools.swift_types import *
 
 
 @wrapper
-class TTS:
+class Text:
 
     def set_locale(self, locale: str): ...
 

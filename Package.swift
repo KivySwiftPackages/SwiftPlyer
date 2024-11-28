@@ -17,6 +17,7 @@ let package = Package(
         .library(name: "Flash", targets: ["Flash"]),
         .library(name: "Notification", targets: ["Notification"]),
         .library(name: "StoragePath", targets: ["StoragePath"]),
+        .library(name: "STT", targets: ["STT"]),
         .library(name: "TTS", targets: ["TTS"]),
         
     ],
@@ -77,6 +78,15 @@ let package = Package(
         ),
         .target(
             name: "StoragePath",
+            dependencies: [
+                .product(name: "SwiftonizeModules", package: "PythonSwiftLink")
+            ],
+            plugins: [
+                .plugin(name: "Swiftonize", package: "SwiftonizePlugin")
+            ]
+        ),
+        .target(
+            name: "STT",
             dependencies: [
                 .product(name: "SwiftonizeModules", package: "PythonSwiftLink")
             ],
