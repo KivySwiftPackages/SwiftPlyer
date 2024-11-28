@@ -10,8 +10,14 @@ let package = Package(
     ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
-        .library(name: "SwiftPlyer", targets: ["SwiftPlyer"]),
+        //.library(name: "SwiftPlyer", targets: ["SwiftPlyer"]),
         .library(name: "Battery", targets: ["Battery"]),
+        .library(name: "Brightness", targets: ["Brightness"]),
+        .library(name: "Call", targets: ["Call"]),
+        .library(name: "Flash", targets: ["Flash"]),
+        .library(name: "Notification", targets: ["Notification"]),
+        .library(name: "StoragePath", targets: ["StoragePath"]),
+        .library(name: "TTS", targets: ["TTS"]),
         
     ],
     dependencies: [
@@ -43,6 +49,15 @@ let package = Package(
             ]
         ),
         .target(
+            name: "Call",
+            dependencies: [
+                .product(name: "SwiftonizeModules", package: "PythonSwiftLink")
+            ],
+            plugins: [
+                .plugin(name: "Swiftonize", package: "SwiftonizePlugin")
+            ]
+        ),
+        .target(
             name: "Flash",
             dependencies: [
                 .product(name: "SwiftonizeModules", package: "PythonSwiftLink")
@@ -51,7 +66,33 @@ let package = Package(
                 .plugin(name: "Swiftonize", package: "SwiftonizePlugin")
             ]
         ),
-        
+        .target(
+            name: "Notification",
+            dependencies: [
+                .product(name: "SwiftonizeModules", package: "PythonSwiftLink")
+            ],
+            plugins: [
+                .plugin(name: "Swiftonize", package: "SwiftonizePlugin")
+            ]
+        ),
+        .target(
+            name: "StoragePath",
+            dependencies: [
+                .product(name: "SwiftonizeModules", package: "PythonSwiftLink")
+            ],
+            plugins: [
+                .plugin(name: "Swiftonize", package: "SwiftonizePlugin")
+            ]
+        ),
+        .target(
+            name: "TTS",
+            dependencies: [
+                .product(name: "SwiftonizeModules", package: "PythonSwiftLink")
+            ],
+            plugins: [
+                .plugin(name: "Swiftonize", package: "SwiftonizePlugin")
+            ]
+        ),
         
         
         
