@@ -11,18 +11,25 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         //.library(name: "SwiftPlyer", targets: ["SwiftPlyer"]),
+        .library(name: "Accelerometer", targets: ["Accelerometer"]),
         .library(name: "Battery", targets: ["Battery"]),
+        .library(name: "Barometer", targets: ["Barometer"]),
         .library(name: "Brightness", targets: ["Brightness"]),
         .library(name: "Call", targets: ["Call"]),
+        .library(name: "Compass", targets: ["Compass"]),
         .library(name: "Flash", targets: ["Flash"]),
         .library(name: "Notification", targets: ["Notification"]),
         .library(name: "StoragePath", targets: ["StoragePath"]),
         .library(name: "STT", targets: ["STT"]),
         .library(name: "TTS", targets: ["TTS"]),
+        .library(name: "Voip", targets: ["Voip"]),
+        .library(name: "UniqueID", targets: ["UniqueID"]),
+        .library(name: "Gps", targets: ["Gps"]),
+        .library(name: "Email", targets: ["Email"]),
         
     ],
     dependencies: [
-        .package(url: "https://github.com/PythonSwiftLink/PythonSwiftLink", branch: "master"),
+        .package(url: "https://github.com/KivySwiftLink/PySwiftKit", from: .init(311, 0, 0)),
         .package(url: "https://github.com/PythonSwiftLink/SwiftonizePlugin", from: .init(0, 0, 2)),
     ],
     targets: [
@@ -32,9 +39,27 @@ let package = Package(
             name: "SwiftPlyer"
         ),
         .target(
+            name: "Accelerometer",
+            dependencies: [
+                .product(name: "SwiftonizeModules", package: "PySwiftKit")
+            ],
+            plugins: [
+                .plugin(name: "Swiftonize", package: "SwiftonizePlugin")
+            ]
+        ),
+        .target(
+            name: "Barometer",
+            dependencies: [
+                .product(name: "SwiftonizeModules", package: "PySwiftKit")
+            ],
+            plugins: [
+                .plugin(name: "Swiftonize", package: "SwiftonizePlugin")
+            ]
+        ),
+        .target(
             name: "Battery",
             dependencies: [
-                .product(name: "SwiftonizeModules", package: "PythonSwiftLink")
+                .product(name: "SwiftonizeModules", package: "PySwiftKit")
             ],
             plugins: [
                 .plugin(name: "Swiftonize", package: "SwiftonizePlugin")
@@ -43,7 +68,7 @@ let package = Package(
         .target(
             name: "Brightness",
             dependencies: [
-                .product(name: "SwiftonizeModules", package: "PythonSwiftLink")
+                .product(name: "SwiftonizeModules", package: "PySwiftKit")
             ],
             plugins: [
                 .plugin(name: "Swiftonize", package: "SwiftonizePlugin")
@@ -52,7 +77,16 @@ let package = Package(
         .target(
             name: "Call",
             dependencies: [
-                .product(name: "SwiftonizeModules", package: "PythonSwiftLink")
+                .product(name: "SwiftonizeModules", package: "PySwiftKit")
+            ],
+            plugins: [
+                .plugin(name: "Swiftonize", package: "SwiftonizePlugin")
+            ]
+        ),
+        .target(
+            name: "Compass",
+            dependencies: [
+                .product(name: "SwiftonizeModules", package: "PySwiftKit")
             ],
             plugins: [
                 .plugin(name: "Swiftonize", package: "SwiftonizePlugin")
@@ -61,7 +95,7 @@ let package = Package(
         .target(
             name: "Flash",
             dependencies: [
-                .product(name: "SwiftonizeModules", package: "PythonSwiftLink")
+                .product(name: "SwiftonizeModules", package: "PySwiftKit")
             ],
             plugins: [
                 .plugin(name: "Swiftonize", package: "SwiftonizePlugin")
@@ -70,7 +104,7 @@ let package = Package(
         .target(
             name: "Notification",
             dependencies: [
-                .product(name: "SwiftonizeModules", package: "PythonSwiftLink")
+                .product(name: "SwiftonizeModules", package: "PySwiftKit")
             ],
             plugins: [
                 .plugin(name: "Swiftonize", package: "SwiftonizePlugin")
@@ -79,7 +113,7 @@ let package = Package(
         .target(
             name: "StoragePath",
             dependencies: [
-                .product(name: "SwiftonizeModules", package: "PythonSwiftLink")
+                .product(name: "SwiftonizeModules", package: "PySwiftKit")
             ],
             plugins: [
                 .plugin(name: "Swiftonize", package: "SwiftonizePlugin")
@@ -88,7 +122,7 @@ let package = Package(
         .target(
             name: "STT",
             dependencies: [
-                .product(name: "SwiftonizeModules", package: "PythonSwiftLink")
+                .product(name: "SwiftonizeModules", package: "PySwiftKit")
             ],
             plugins: [
                 .plugin(name: "Swiftonize", package: "SwiftonizePlugin")
@@ -97,20 +131,53 @@ let package = Package(
         .target(
             name: "TTS",
             dependencies: [
-                .product(name: "SwiftonizeModules", package: "PythonSwiftLink")
+                .product(name: "SwiftonizeModules", package: "PySwiftKit")
             ],
             plugins: [
                 .plugin(name: "Swiftonize", package: "SwiftonizePlugin")
             ]
         ),
-        
-        
-        
-        
-        
+        .target(
+            name: "Voip",
+            dependencies: [
+                .product(name: "SwiftonizeModules", package: "PySwiftKit")
+            ],
+            plugins: [
+                .plugin(name: "Swiftonize", package: "SwiftonizePlugin")
+            ]
+        ),
+        .target(
+            name: "UniqueID",
+            dependencies: [
+                .product(name: "SwiftonizeModules", package: "PySwiftKit")
+            ],
+            plugins: [
+                .plugin(name: "Swiftonize", package: "SwiftonizePlugin")
+            ]
+        ),
+        .target(
+            name: "Gps",
+            dependencies: [
+                .product(name: "SwiftonizeModules", package: "PySwiftKit")
+            ],
+            plugins: [
+                .plugin(name: "Swiftonize", package: "SwiftonizePlugin")
+            ]
+        ),
+        .target(
+            name: "Email",
+            dependencies: [
+                .product(name: "SwiftonizeModules", package: "PySwiftKit")
+            ],
+            plugins: [
+                .plugin(name: "Swiftonize", package: "SwiftonizePlugin")
+            ]
+        ),
         .testTarget(
             name: "SwiftPlyerTests",
             dependencies: ["SwiftPlyer"]
         ),
+        
+        
     ]
 )

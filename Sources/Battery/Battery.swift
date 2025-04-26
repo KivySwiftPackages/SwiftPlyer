@@ -21,8 +21,11 @@ public class Battery {
         let isCharging = is_charging.pyPointer
         let percentage = (device.batteryLevel * 100).pyPointer
         
-        status.setPyDictItem("isCharging", isCharging)
-        status.setPyDictItem("percentage", percentage)
+        
+//        status.setPyDictItem("isCharging", isCharging)
+        PyDict_SetItem(status, "isCharging", isCharging)
+//        status.setPyDictItem("percentage", percentage)
+        PyDict_SetItem(status, "percentage", percentage)
         
         isCharging.decref()
         percentage.decref()

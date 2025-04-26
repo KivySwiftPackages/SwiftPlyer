@@ -1,10 +1,9 @@
 from swift_tools.swift_types import *
 
 @wrapper
-class Flash:
+class UniqueID:
 
     def __init__(self): ...
-
-    def on(self): ...
-
-    def off(self): ...
+    
+    def get_uid(self) -> str: ...
+    

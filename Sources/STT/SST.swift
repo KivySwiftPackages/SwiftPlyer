@@ -1,7 +1,6 @@
-import Foundation
 import AVFoundation
+import Foundation
 import Speech
-
 
 public class STT {
     private var audioEngine: AVAudioEngine?
@@ -37,12 +36,13 @@ public class STT {
                 //self?.speakError(RecognizerError.recognizerIsUnavailable)
                 return
             }
-            
+
             do {
                 let (audioEngine, request) = try Self.prepareEngine()
                 self.audioEngine = audioEngine
                 self.request = request
-                self.task = recognizer.recognitionTask(with: request, resultHandler: self.recognitionHandler(result:error:))
+                self.task = recognizer.recognitionTask(
+                    with: request, resultHandler: self.recognitionHandler(result:error:))
             } catch {
                 self.stop()
                 //self.speakError(error)
@@ -53,12 +53,12 @@ public class STT {
     private func recognitionHandler(result: SFSpeechRecognitionResult?, error: Error?) {
         let receivedFinalResult = result?.isFinal ?? false
         let receivedError = error != nil
-        
+
         if receivedFinalResult || receivedError {
             audioEngine?.stop()
             audioEngine?.inputNode.removeTap(onBus: 0)
         }
-        
+
         if let result = result {
             //speak(result.bestTranscription.formattedString)
             results.append(result.bestTranscription.formattedString)
@@ -82,26 +82,28 @@ public class STT {
     }
 }
 
+extension STT {
+    private static func prepareEngine() throws -> (
+        AVAudioEngine, SFSpeechAudioBufferRecognitionRequest
+    ) {
+        let audioEngine = AVAudioEngine()
 
-fileprivate extension STT {
-    private static func prepareEngine() throws -> (AVAudioEngine, SFSpeechAudioBufferRecognitionRequest) {
-            let audioEngine = AVAudioEngine()
-            
-            let request = SFSpeechAudioBufferRecognitionRequest()
-            request.shouldReportPartialResults = true
-            
-            let audioSession = AVAudioSession.sharedInstance()
-            try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
-            try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
-            let inputNode = audioEngine.inputNode
-            
-            let recordingFormat = inputNode.outputFormat(forBus: 0)
-            inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
-                request.append(buffer)
-            }
-            audioEngine.prepare()
-            try audioEngine.start()
-            
-            return (audioEngine, request)
+        let request = SFSpeechAudioBufferRecognitionRequest()
+        request.shouldReportPartialResults = true
+
+        let audioSession = AVAudioSession.sharedInstance()
+        try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
+        try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
+        let inputNode = audioEngine.inputNode
+
+        let recordingFormat = inputNode.outputFormat(forBus: 0)
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) {
+            (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
+            request.append(buffer)
         }
+        audioEngine.prepare()
+        try audioEngine.start()
+
+        return (audioEngine, request)
+    }
 }

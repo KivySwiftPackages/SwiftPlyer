@@ -12,7 +12,7 @@ public class Flash {
             camera?.unlockForConfiguration()
         }
         catch let err {
-            err.pyExceptionError()
+            err.anyErrorException()
         }
     }
     
@@ -23,7 +23,7 @@ public class Flash {
             camera?.unlockForConfiguration()
         }
         catch let err {
-            err.pyExceptionError()
+            err.anyErrorException()
         }
     }
 }

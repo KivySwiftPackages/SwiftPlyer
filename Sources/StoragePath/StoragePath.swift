@@ -2,7 +2,7 @@ import Foundation
 
 import PythonCore
 import PySwiftCore
-import PyEncode
+import PySerializing
 
 fileprivate extension FileManager {
     func url(for directory: FileManager.SearchPathDirectory, in domainMask: FileManager.SearchPathDomainMask = .allDomainsMask) -> PyPointer {
